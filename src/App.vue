@@ -1,28 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <el-button>APP.vue</el-button> -->
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+  name: "app",
+  components: {}
+};
 </script>
 
+
+// 滚动条的样式
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.25);
+  transition: color 0.2s ease;
 }
 </style>
