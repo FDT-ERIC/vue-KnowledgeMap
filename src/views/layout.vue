@@ -15,17 +15,10 @@
           >
             <el-menu-item index="1">首页</el-menu-item>
             <el-menu-item index="2">研报</el-menu-item>
-            <el-menu-item index="3">分析师</el-menu-item>
-            <el-submenu index="4">
-              <template slot="title">券商</template>
-              <el-menu-item index="4-1">选项1</el-menu-item>
-              <el-menu-item index="4-2">选项2</el-menu-item>
-              <el-menu-item index="4-3">选项3</el-menu-item>
-            </el-submenu>
             <!-- 搜索框 -->
             <el-menu-item>
               <el-input placeholder="请输入内容" v-model="searchInput" style="margin-bottom:1%">
-                <el-button slot="append" icon="el-icon-search"></el-button>
+                <el-button slot="append" icon="el-icon-search" @click="searchCompany(searchInput)"></el-button>
               </el-input>
             </el-menu-item>
             <!-- 用户个人中心 -->
@@ -37,9 +30,8 @@
                   src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
                 ></el-avatar>EricDa
               </template>
-              <el-menu-item index="5-1">选项1</el-menu-item>
-              <el-menu-item index="5-2">选项2</el-menu-item>
-              <el-menu-item index="5-3">选项3</el-menu-item>
+              <el-menu-item index="5-1">登录</el-menu-item>
+              <el-menu-item index="5-2">注册</el-menu-item>
             </el-submenu>
           </el-menu>
         </el-header>
@@ -71,7 +63,23 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
+    },
+    searchCompany(text) {
+      this.$router.push('/search')
+      this.$axios
+      .get(
+        "/api/companyAll/search",
+        {
+          params: {
+            // name: this.$store.state.company_name["公司简称"]
+            name: text
+          }
+        }
+      )
+      .then(res => {
+        console.log(res.data)
+      });
     }
   }
 };

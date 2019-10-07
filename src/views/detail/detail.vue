@@ -2,7 +2,7 @@
   <div>
     <el-card class="box-card" shadow="always" style="width:100%">
       <div class="clearfix" slot="header">
-        <h2 style="float:left">{{name}}</h2>
+        <h2 style="float:left">{{this.name}}</h2>
       </div>
       <div class="row">
         <div class="col-6">
@@ -13,7 +13,8 @@
             style="color:grey; font-size:90%"
           >
             {{item}}
-            <span style="color:black">123</span>
+            <span>：</span>
+            <span style="color:black">{{allData[item]}}</span>
           </div>
         </div>
         <div class="col-6">
@@ -24,7 +25,8 @@
             style="color:grey; font-size:90%"
           >
             {{item}}
-            <span style="color:black">123</span>
+            <span>：</span>
+            <span style="color:black">{{allData[item]}}</span>
           </div>
         </div>
       </div>
@@ -63,11 +65,31 @@
 export default {
   data() {
     return {
-      name: "创新工场",
-      mes_left: ["成立日期：", "机构类型：", "办公地址："],
-      mes_right: ["注册资本：", "组织形式：", "上市日期："]
+      name: localStorage.company_name,
+      mes_left: [],
+      mes_right: [],
+      allData: Object
     };
-  }
+  },
+  mounted() {
+    this.$axios
+      .get(
+        "/api/company/intro/detail",
+        {
+          params: {
+            // name: this.$store.state.company_name["公司简称"]
+            name: localStorage.company_name
+          }
+        }
+      )
+      .then(res => {
+        console.log(res.data.res)
+        this.allData = res.data.res
+        this.mes_left = Object.keys(res.data.res).slice(0,13);
+        this.mes_right = Object.keys(res.data.res).slice(13,26)
+      });
+    // console.log(this.$store.state.company_name["公司简称"])
+  },
 };
 </script>
 

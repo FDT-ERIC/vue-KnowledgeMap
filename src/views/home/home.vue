@@ -1,12 +1,26 @@
 <template>
   <div>
-      <el-card :body-style="{ padding: '0px'   }" shadow="hover" @click.native="$router.push('/general')">
+    <div class="clearfix" style="margin:1%">
+      <h2 style="float:left">热门公司</h2>
+      <el-button
+        style="float: right; padding: 3px 0; align:center; padding:center"
+        type="text"
+        @click="$router.push('/search')"
+      >查看更多</el-button>
+    </div>
+    <div v-for="(item, index) in arr_company" :key="index" style="display:blockl;">
+      <el-card
+        :body-style="{ padding: '0px'}"
+        shadow="hover"
+        style="float:left; margin:1%"
+        @click.native="handleSelect(item)"
+      >
         <div style="padding:5%">
           <img style="width:100%;" src="../../assets/chuangxin_logo.png" class="image" />
         </div>
         <div style="padding: 14px 14px 0 14px;">
           <h6 class="text-center">
-            <strong>创新工场</strong>
+            <strong>{{item["公司简称"]}}</strong>
           </h6>
           <div class="bottom clearfix" style=" text-align:center">
             <div style="display:inline-block;" class="mt-4">
@@ -40,6 +54,7 @@
           </div>
         </div>
       </el-card>
+    </div>
   </div>
 </template>
 
@@ -48,6 +63,7 @@ export default {
   data() {
     return {
       navBarIndex: "1", // 一进来默认是选中第 1 个
+      arr_company: [],
       card: {
         // 推荐指数
         rating_value: 5
@@ -55,9 +71,20 @@ export default {
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    // handleSelect(key, keyPath) {
+    //   console.log(key, keyPath);
+    // },
+    handleSelect(company_name) {
+      // 将公司名存储在全局的store中，方便跳转页面获取
+      localStorage.setItem("company_name", company_name["公司简称"]);
+      // this.$store.state.company_name = company_name;
+      this.$router.push("/company");
     }
+  },
+  mounted() {
+    this.$axios.get("/api/company/").then(res => {
+      this.arr_company = res.data.res.company_top;
+    });
   }
 };
 </script>

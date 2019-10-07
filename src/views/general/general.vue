@@ -3,7 +3,7 @@
     <!-- 第一个主卡片 -->
     <el-card class="box-card" shadow="always" style="width:100%">
       <div class="clearfix">
-        <h2 style="float:left">{{name}}</h2>
+        <h2 style="float:left">{{this.companyName}}</h2>
         <el-button
           style="float: right; padding: 3px 0; align:center; padding:center"
           type="text"
@@ -19,7 +19,8 @@
             style="color:grey; font-size:90%"
           >
             {{item}}
-            <span style="color:black">123</span>
+            <span>：</span>
+            <span style="color:black">{{allData[item]}}</span>
           </div>
         </div>
         <div class="col-6">
@@ -30,17 +31,9 @@
             style="color:grey; font-size:90%"
           >
             {{item}}
-            <span style="color:black">123</span>
+            <span>：</span>
+            <span style="color:black">{{allData[item]}}</span>
           </div>
-        </div>
-      </div>
-      <hr />
-      <div>
-        <div>
-          <h2>经济指数</h2>
-        </div>
-        <div>
-          <span>123</span>
         </div>
       </div>
     </el-card>
@@ -49,11 +42,11 @@
     <el-card shadow="always" style="width:100%">
       <div class="row">
         <div class="col-6">
-            <h2 style="float:left">看好和看空</h2>
+          <h2 style="float:left">看好</h2>
           <el-card shadow="hover" style="width:100%">鼠标悬浮时显示</el-card>
         </div>
         <div class="col-6">
-            <h2 style="float:left">看好和看空</h2>
+          <h2 style="float:left">看空</h2>
           <el-card shadow="hover" style="width:100%">鼠标悬浮时显示</el-card>
         </div>
       </div>
@@ -62,13 +55,37 @@
 </template>
 
 <script>
+import qs from "qs";
 export default {
   data() {
     return {
-      name: "创新工场",
-      mes_left: ["成立日期：", "机构类型：", "办公地址："],
-      mes_right: ["注册资本：", "组织形式：", "上市日期："]
+      companyName: localStorage.company_name,
+      mes_left: [],
+      mes_right: [],
+      allData: Object
     };
+  },
+  mounted() {
+    this.$axios
+      .get("/api/company/intro", {
+        params: {
+          // name: this.$store.state.company_name["公司简称"]
+          name: localStorage.company_name
+        }
+      })
+      .then(res => {
+        this.allData = res.data.res;
+        this.mes_left = Object.keys(res.data.res).slice(0, 3);
+        this.mes_right = Object.keys(res.data.res).slice(3, 6);
+      });
+    this.$axios.get("/api/company/news", {
+      params: {
+        name: localStorage.company_name
+      }
+    })
+    .then(res => {
+      console.log(res.data)
+    });
   }
 };
 </script>
