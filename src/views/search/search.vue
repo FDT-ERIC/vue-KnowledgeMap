@@ -84,6 +84,7 @@ export default {
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.tableData.pageSize = val;
+      this.tableData.lenData = this.allData.length;
       this.tableData.currentData = this.allData.slice(
         (this.tableData.currentPage - 1) * val,
         this.tableData.currentPage * val
