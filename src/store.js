@@ -12,6 +12,7 @@ Vue.use(Vuex);
 //state
 const state = {
   company_name: "", //公司名称
+  news: Object, //存放新闻信息
 }
 
 // getters

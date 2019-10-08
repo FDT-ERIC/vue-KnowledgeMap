@@ -75,6 +75,10 @@ export default {
         this.tableData.currentPage * this.tableData.pageSize
       );
     });
+    // 用于导航搜索
+    if (localStorage.company_search_from_navbar != " ") {
+      this.searchCompany(localStorage.company_search_from_navbar)
+    }
   },
   methods: {
     handleSizeChange(val) {
@@ -98,20 +102,18 @@ export default {
       this.$router.push("/detail");
     },
     searchCompany(text) {
-      // console.log(text)
+      localStorage.company_search_from_navbar = text
       this.$axios
-      .get(
-        "/api/companyAll/search",
-        {
+        .get("/api/companyAll/search", {
           params: {
-            // name: this.$store.state.company_name["公司简称"]
             name: text
           }
-        }
-      )
-      .then(res => {
-        console.log(res.data)
-      });
+        })
+        .then(res => {
+          // console.log(res.data)
+          this.tableData.lenData = res.data.res.length;
+          this.tableData.currentData = res.data.res;
+        });
     }
   },
   computed: {}

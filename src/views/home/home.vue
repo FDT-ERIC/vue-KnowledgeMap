@@ -5,7 +5,7 @@
       <el-button
         style="float: right; padding: 3px 0; align:center; padding:center"
         type="text"
-        @click="$router.push('/search')"
+        @click="watchMore"
       >查看更多</el-button>
     </div>
     <div v-for="(item, index) in arr_company" :key="index" style="display:blockl;">
@@ -79,9 +79,14 @@ export default {
       localStorage.setItem("company_name", company_name["公司简称"]);
       // this.$store.state.company_name = company_name;
       this.$router.push("/company");
+    },
+    watchMore() {
+      localStorage.company_search_from_navbar = " "
+      this.$router.push('/search')
     }
   },
   mounted() {
+    localStorage.company_search_from_navbar = " ";
     this.$axios.get("/api/company/").then(res => {
       this.arr_company = res.data.res.company_top;
     });

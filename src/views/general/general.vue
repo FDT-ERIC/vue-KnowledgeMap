@@ -41,14 +41,31 @@
     <!-- 第二个主卡片 -->
     <el-card shadow="always" style="width:100%">
       <div class="row">
-        <div class="col-6">
-          <h2 style="float:left">看好</h2>
-          <el-card shadow="hover" style="width:100%">鼠标悬浮时显示</el-card>
+        <div class="col-12">
+          <h2 style="float:left; margin-bottom:3%">新闻</h2>
+          <el-card
+            shadow="hover"
+            style="width:100%; margin-top:1%"
+            v-for="(item, index) in news"
+            :key="index"
+            @click.native="newsClick(item)"
+          >
+            <h5>{{item["公司简称"]}}</h5>
+            <div style="color:grey; font-size:90%">
+              <span>网站:&nbsp;&nbsp;&nbsp;{{item["网站"]}}</span>
+              <div>
+                <span style="margin-right:2%">机构：{{item["机构"]}}</span>
+                <span style="margin-right:2%">研究员：{{item["研究员"]}}</span>
+                <span style="margin-right:2%">研究类别：{{item["类别"]}}</span>
+                <span>日期：{{item["日期"]}}</span>
+              </div>
+            </div>
+          </el-card>
         </div>
-        <div class="col-6">
+        <!-- <div class="col-6">
           <h2 style="float:left">看空</h2>
           <el-card shadow="hover" style="width:100%">鼠标悬浮时显示</el-card>
-        </div>
+        </div>-->
       </div>
     </el-card>
   </div>
@@ -62,7 +79,8 @@ export default {
       companyName: localStorage.company_name,
       mes_left: [],
       mes_right: [],
-      allData: Object
+      allData: Object,
+      news: []
     };
   },
   mounted() {
@@ -78,14 +96,23 @@ export default {
         this.mes_left = Object.keys(res.data.res).slice(0, 3);
         this.mes_right = Object.keys(res.data.res).slice(3, 6);
       });
-    this.$axios.get("/api/company/news", {
-      params: {
-        name: localStorage.company_name
-      }
-    })
-    .then(res => {
-      console.log(res.data)
-    });
+    this.$axios
+      .get("/api/company/news", {
+        params: {
+          name: localStorage.company_name
+        }
+      })
+      .then(res => {
+        // console.log(res.data.res)
+        this.news = res.data.res;
+      });
+  },
+  methods: {
+    newsClick(item) {
+      console.log(item);
+      this.$store.state.news = item
+      this.$router.push('/news')
+    }
   }
 };
 </script>

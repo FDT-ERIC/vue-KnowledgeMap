@@ -66,20 +66,14 @@ export default {
       // console.log(key, keyPath);
     },
     searchCompany(text) {
-      this.$router.push('/search')
-      this.$axios
-      .get(
-        "/api/companyAll/search",
-        {
-          params: {
-            // name: this.$store.state.company_name["公司简称"]
-            name: text
-          }
-        }
-      )
-      .then(res => {
-        console.log(res.data)
-      });
+      console.log(this.$route.path);
+      if (this.$route.path != "/search") {
+        localStorage.setItem("company_search_from_navbar", text);
+        this.$router.push("/search");
+      } else {
+        localStorage.setItem("company_search_from_navbar", text);
+      }
+      this.searchInput = "";
     }
   }
 };
