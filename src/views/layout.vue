@@ -4,7 +4,7 @@
       <el-container class="con_small">
         <!-- 顶部导航 -->
         <el-header class="d-flex align-items-center">
-          <a class="h5 text-light mb-0 mr-auto">创新工场大湾区人工智能研究院</a>
+          <a class="h5 text-light mb-0 mr-auto">财经信息舆情平台</a>
           <el-menu
             :default-active="navBarIndex"
             mode="horizontal"
@@ -22,7 +22,7 @@
               </el-input>
             </el-menu-item>
             <!-- 用户个人中心 -->
-            <el-submenu index="5">
+            <el-submenu index="100">
               <template slot="title">
                 <el-avatar
                   style="margin: 0 5% 5% 0"
@@ -30,8 +30,8 @@
                   src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
                 ></el-avatar>EricDa
               </template>
-              <el-menu-item index="5-1">登录</el-menu-item>
-              <el-menu-item index="5-2">注册</el-menu-item>
+              <el-menu-item index="100-1">登录</el-menu-item>
+              <el-menu-item index="100-2">注册</el-menu-item>
             </el-submenu>
           </el-menu>
         </el-header>
@@ -42,7 +42,7 @@
         </el-main>
 
         <!-- 底部 -->
-        <el-footer>Footer</el-footer>
+        <!-- <el-footer>Footer</el-footer> -->
       </el-container>
     </el-container>
   </div>
@@ -63,7 +63,12 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
-      // console.log(key, keyPath);
+      console.log(key, keyPath);
+      if (key == 1) {
+        this.$router.push("/home"); // 跳转到主页
+      } else if (key == "100-1") {
+        this.$router.push("/login"); // 跳转到登录页
+      }
     },
     searchCompany(text) {
       console.log(this.$route.path);
@@ -92,7 +97,7 @@ export default {
 
 .con_small {
   height: 100%;
-  padding-bottom: 60px;
+  padding-bottom: 0px;
 }
 
 .el-header {
@@ -107,7 +112,7 @@ export default {
   width: 17%;
 }
 
-.el-footer {
+/* .el-footer {
   background-color: #b3c0d1;
   color: #333;
   position: absolute;
@@ -115,5 +120,5 @@ export default {
   bottom: 0px;
   width: 100%;
   height: 50px;
-}
+} */
 </style>

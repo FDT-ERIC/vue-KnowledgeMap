@@ -88,6 +88,7 @@ export default {
   mounted() {
     localStorage.company_search_from_navbar = " ";
     this.$axios.get("/api/company/").then(res => {
+      console.log(res.data.res)
       this.arr_company = res.data.res.company_top;
     });
   }

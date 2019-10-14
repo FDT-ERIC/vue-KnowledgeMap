@@ -76,7 +76,7 @@ export default {
       );
     });
     // 用于导航搜索
-    if (localStorage.company_search_from_navbar != " ") {
+    if (localStorage.company_search_from_navbar) {
       this.searchCompany(localStorage.company_search_from_navbar)
     }
   },
@@ -85,6 +85,7 @@ export default {
       console.log(`每页 ${val} 条`);
       this.tableData.pageSize = val;
       this.tableData.lenData = this.allData.length;
+      console.log(this.allData.length)
       this.tableData.currentData = this.allData.slice(
         (this.tableData.currentPage - 1) * val,
         this.tableData.currentPage * val
