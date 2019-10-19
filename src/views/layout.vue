@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container class="con_big">
-      <el-container class="con_small">
+      <el-container class="con_small" style="padding-bottom: 0px;">
         <!-- 顶部导航 -->
         <el-header class="d-flex align-items-center">
           <a class="h5 text-light mb-0 mr-auto">财经信息舆情平台</a>
@@ -38,11 +38,8 @@
 
         <!-- 主布局 -->
         <el-main>
-          <router-view></router-view>
+          <router-view ></router-view>
         </el-main>
-
-        <!-- 底部 -->
-        <!-- <el-footer>Footer</el-footer> -->
       </el-container>
     </el-container>
   </div>
@@ -112,13 +109,4 @@ export default {
   width: 17%;
 }
 
-/* .el-footer {
-  background-color: #b3c0d1;
-  color: #333;
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
-  height: 50px;
-} */
 </style>

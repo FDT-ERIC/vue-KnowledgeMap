@@ -13,6 +13,7 @@ Vue.use(Vuex);
 const state = {
   company_name: "", //公司名称
   news: Object, //存放新闻信息
+  kmData: Object, //存放知识图谱信息
 }
 
 // getters

@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div style="width:1300px; margin:0 auto">
     <!-- 第一个主卡片 -->
     <el-card
       class="box-card"
       shadow="always"
-      style="width:100%; padding-bottom:1%; margin-bottom:1%"
+      style="width:100%; padding-bottom:1%; margin-bottom:10px"
     >
       <h2 style="float:left">所有公司</h2>
       <el-input placeholder="请输入公司名" v-model="searchInput" style="float:right; width:22%">
@@ -64,6 +64,7 @@ export default {
   },
   mounted() {
     this.$axios.get("/api/companyAll").then(res => {
+      console.log(res.data.res)
       this.allData = res.data.res;
       //  一共有多少条数据
       this.tableData.lenData = this.allData.length;
@@ -76,7 +77,7 @@ export default {
       );
     });
     // 用于导航搜索
-    if (localStorage.company_search_from_navbar) {
+    if (localStorage.company_search_from_navbar != " ") {
       this.searchCompany(localStorage.company_search_from_navbar)
     }
   },

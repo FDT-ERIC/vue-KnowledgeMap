@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="clearfix" style="margin:1%">
+  <div style="width:1300px; margin:0 auto">
+    <div class="clearfix" style="margin:15px;">
       <h2 style="float:left">热门公司</h2>
       <el-button
         style="float: right; padding: 3px 0; align:center; padding:center"
@@ -10,23 +10,23 @@
     </div>
     <div v-for="(item, index) in arr_company" :key="index" style="display:blockl;">
       <el-card
-        :body-style="{ padding: '0px'}"
+        :body-style="{ padding: '10px'}"
         shadow="hover"
-        style="float:left; margin:1%"
+        style="float:left; margin:10px; width:240px"
         @click.native="handleSelect(item)"
       >
-        <div style="padding:5%">
+        <!-- <div style="padding:5%">
           <img style="width:100%;" src="../../assets/chuangxin_logo.png" class="image" />
-        </div>
+        </div> -->
         <div style="padding: 14px 14px 0 14px;">
           <h6 class="text-center">
             <strong>{{item["公司简称"]}}</strong>
           </h6>
           <div class="bottom clearfix" style=" text-align:center">
-            <div style="display:inline-block;" class="mt-4">
-              <span style="font-size:85%; float:left;" class="text-secondary">推荐指数：</span>
+            <div style="display:inline-block;" class="mt-3">
+              <span style="font-size:13px; float:left;" class="text-secondary">推荐指数：</span>
               <el-rate
-                style="float:right; width:auto"
+                style="float:right; width:120px"
                 v-model="card.rating_value"
                 disabled
                 text-color="#ff9900"
@@ -34,8 +34,8 @@
             </div>
           </div>
           <hr />
-          <div class="m-4" style="font-size:80%">
-            <div style="width:50%; float:left; text-align:left;">
+          <div class="m-4" style="font-size:80%;">
+            <div style="width:50%; float:left; text-align:left; margin-bottom:13px">
               <div>
                 <span>看好评论</span>
               </div>
@@ -43,7 +43,7 @@
                 <span>100条</span>
               </div>
             </div>
-            <div style="width:50%; float:right; text-align:right;">
+            <div style="width:50%; float:right; text-align:right; margin-bottom:13px">
               <div>
                 <span>看空评论</span>
               </div>
@@ -110,12 +110,9 @@ export default {
   height: 100%;
   padding-bottom: 60px;
 }
+
 .el-header {
   background-color: #545c64;
-}
-
-.el-card {
-  width: 17%;
 }
 
 .el-footer {

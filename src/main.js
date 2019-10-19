@@ -5,7 +5,9 @@ import router from "./router.js";
 import store from './store'
 import axios from 'axios'
 import BootstrapVue from 'bootstrap-vue'
+import Vs from 'd3-vs'
 
+Vue.use(Vs)
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios; // 可以全局使用它进行接口调用

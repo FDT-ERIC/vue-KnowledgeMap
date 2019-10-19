@@ -1,22 +1,22 @@
 <template>
-  <div>
+  <div style="width:1300px; margin:0 auto">
     <!-- 第一个主卡片 -->
     <el-card class="box-card" shadow="always" style="width:100%">
       <div class="clearfix">
-        <h2 style="float:left">{{this.companyName}}</h2>
+        <h3 style="float:left">{{this.companyName}}</h3>
         <el-button
           style="float: right; padding: 3px 0; align:center; padding:center"
           type="text"
           @click="$router.push('/detail')"
         >查看详情</el-button>
       </div>
-      <div class="row" style="margin-top:2%">
+      <div class="row" style="margin-top:20px">
         <div class="col-6">
           <div
             v-for="(item, index) in mes_left"
             :key="index"
             class="text item"
-            style="color:grey; font-size:90%"
+            style="color:grey; font-size:13px; margin-bottom:6px"
           >
             {{item}}
             <span>：</span>
@@ -28,7 +28,7 @@
             v-for="(item, index) in mes_right"
             :key="index"
             class="text item"
-            style="color:grey; font-size:90%"
+            style="color:grey; font-size:13px; margin-bottom:6px"
           >
             {{item}}
             <span>：</span>
@@ -39,21 +39,21 @@
     </el-card>
 
     <!-- 第二个主卡片 -->
-    <el-card shadow="always" style="width:100%">
+    <el-card shadow="always" style="width:100%; margin-top:10px">
       <div class="row">
         <div class="col-12">
-          <h2 style="float:left; margin-bottom:3%">新闻</h2>
+          <h3 style="float:left; margin-bottom:30px">相关新闻</h3>
           <el-card
             shadow="hover"
-            style="width:100%; margin-top:1%"
+            style="width:100%; margin-top:20px; border-color:#87CEFA"
             v-for="(item, index) in news"
             :key="index"
             @click.native="newsClick(item)"
           >
             <h5>{{item["公司简称"]}}</h5>
-            <div style="color:grey; font-size:90%">
+            <div style="color:grey; font-size:13px; margin-top:5px">
               <span>网站:&nbsp;&nbsp;&nbsp;{{item["网站"]}}</span>
-              <div>
+              <div style="margin-top:5px">
                 <span style="margin-right:2%">机构：{{item["机构"]}}</span>
                 <span style="margin-right:2%">研究员：{{item["研究员"]}}</span>
                 <span style="margin-right:2%">研究类别：{{item["类别"]}}</span>
