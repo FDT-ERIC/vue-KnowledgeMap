@@ -1,7 +1,19 @@
 import Vue from "vue";
 import Router from "vue-router";
+import layout from "./views/layout.vue"
+import home from "./views/home/home.vue"
+import company from "./views/general/general.vue"
+import news from "./views/news/news.vue"
+import detail from "./views/detail/detail.vue"
+import search from "./views/search/search.vue"
+import test from "./views/testt/testt.vue"
+import login from "./views/login/login.vue"
 
 Vue.use(Router)
+
+function loadView(view) {
+    return () => import(/* webpackChunkName: "view-[request]" */ `@/views/${view}/${view}.vue`)
+}
 
 const router = new Router({
     mode: 'history',
@@ -10,44 +22,51 @@ const router = new Router({
             path: '/',
             name: 'layout',
             redirect: '/home',
-            component: () => import('./views/layout.vue'),
+            component: layout,
             children: [
                 {
                     path:'/home',
                     name: 'home',
-                    component: () => import('./views/home/home.vue')
+                    component: loadView('home')
+                    // component: home
                 },
                 {
                     path:'/company',
                     name: 'company',
-                    component: () => import('./views/general/general.vue')
+                    component: loadView('general')
+                    // component: company
                 },
                 {
                     path:'/news',
                     name: 'news',
-                    component: () => import('./views/news/news.vue')
+                    // component: loadView('news')
+                    component: news
                 },
                 {
                     path:'/detail',
                     name: 'detail',
-                    component: () => import('./views/detail/detail.vue')
+                    // component: loadView('detail')
+                    component: detail
                 },
                 {
                     path:'/search',
                     name: 'search',
-                    component: () => import('./views/search/search.vue')
+                    // component: loadView('search')
+                    component: search
                 },
                 {
                     path:'/test',
                     name: 'test',
-                    component: () => import('./views/testt/testt.vue')
+                    // component: loadView('test')
+                    component: test
                 },
             ]
         },
         {
             path:'/login',
             name: 'login',
-            component: () => import('./views/login/login.vue')
+            // component: loadView('login')
+            component: login
         }
     ]
 })

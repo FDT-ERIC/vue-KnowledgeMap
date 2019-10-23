@@ -3,7 +3,7 @@
     <el-container class="con_big">
       <el-container class="con_small" style="padding-bottom: 0px;">
         <!-- 顶部导航 -->
-        <el-header class="d-flex align-items-center">
+        <el-header class="d-flex align-items-center" style="background-color: #FFA500;">
           <a class="h5 text-light mb-0 mr-auto">财经信息舆情平台</a>
           <el-menu
             :default-active="navBarIndex"
