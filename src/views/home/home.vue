@@ -75,7 +75,6 @@ export default {
     //   console.log(key, keyPath);
     // },
     handleSelect(company_name) {
-      console.log("获取到了")
       // 将公司名存储在全局的store中，方便跳转页面获取
       localStorage.setItem("company_name", company_name["公司简称"]);
       // this.$store.state.company_name = company_name;
@@ -89,7 +88,7 @@ export default {
   mounted() {
     localStorage.company_search_from_navbar = " ";
     this.$axios.get("/api/company/").then(res => {
-      console.log(res.data.res)
+      // console.log(res.data.res)
       this.arr_company = res.data.res.company_top;
     });
   }

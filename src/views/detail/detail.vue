@@ -53,9 +53,9 @@ export default {
       mes_right: [],
       allData: Object,
       allKmData: Object, // 存储知识图谱的数据，从后台获取
-      allKmData_keys: [], // 存储知识图谱的数据的键值
-      allKmData_big: {name: "", children: []}, // 大的关系节点
-      allKmData_small: {name: ""}, // 关系节点后的数据
+      // allKmData_keys: [], // 存储知识图谱的数据的键值
+      // allKmData_big: {name: "", children: []}, // 大的关系节点
+      // allKmData_small: {name: ""}, // 关系节点后的数据
       finalKmData: {name: "", children: []} // 最后的结果
     };
   },
@@ -63,7 +63,7 @@ export default {
     initChart() {
       this.chart = echarts.init(document.getElementById("orgManagement"));
       this.chart.on("contextmenu", params => {
-        console.log(params);
+        // console.log(params);
         if (params.componentType === "series") {
           this.selectedOrg = params.data;
           this.popoverPanelShow = true;
@@ -125,7 +125,7 @@ export default {
       .then(res => {
         // console.log(res.data.res);
         this.allData = res.data.res;
-        console.log(this.allData);
+        // console.log(this.allData);
         this.mes_left = Object.keys(res.data.res).slice(0, 13);
         this.mes_right = Object.keys(res.data.res).slice(13, 26);
       });
@@ -139,14 +139,18 @@ export default {
       .then(res => {
         this.allKmData = res.data.res;
         // console.log("res", this.allKmData)
-        this.allKmData_keys = Object.keys(this.allKmData)
-        this.allKmData_keys.forEach(key => {
-          this.allKmData_big.name = key
-          this.allKmData_big.children = this.allKmData[key]
-          // console.log("big", this.allKmData_big)
-          this.finalKmData.name = localStorage.company_name
-          this.finalKmData.children.push(this.allKmData_big)
-        });
+        // this.allKmData_keys = Object.keys(this.allKmData)
+        // this.allKmData_keys.forEach(key => {
+        //   console.log("key:", key)
+        //   this.allKmData_big.name = key
+        //   this.allKmData_big.children = this.allKmData[key]
+        //   // console.log("big", this.allKmData_big)
+        //   this.finalKmData.name = localStorage.company_name
+        //   this.finalKmData.children.push(this.allKmData_big)
+        //   console.log(this.allKmData_big)
+        // });
+        this.finalKmData.name = localStorage.company_name
+        this.finalKmData.children = this.allKmData
         this.initChart();
       });
   }
